@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://convertmitra.github.io/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/about.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/contact.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/privacy-policy.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/terms.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tools Pages -->
+  <url>
+    <loc>https://convertmitra.github.io/tools/pdf-to-word.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/tools/word-to-pdf.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/tools/jpg-to-png.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://convertmitra.github.io/tools/image-compressor.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
