@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word to PDF Converter - ConvertMitra</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header><nav><a href="../index.html">Home</a></nav></header>
+<main>
+  <h1>Word to PDF Converter</h1>
+  <input type="file" id="wordFile" accept=".doc,.docx,.txt">
+  <button onclick="convertWord()">Convert</button>
+  <a id="downloadLink" style="display:none;">Download PDF</a>
+</main>
+<footer><p>&copy; 2025 ConvertMitra</p></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+<script>
+function convertWord(){
+  const file = document.getElementById("wordFile").files[0];
+  if(!file) return alert("Upload a Word file");
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const text = e.target.result;
+    const docDefinition = { content: text };
+    pdfMake.createPdf(docDefinition).download("converted.pdf");
+  }
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>
