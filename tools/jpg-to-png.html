@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPG to PNG Converter - ConvertMitra</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header><nav><a href="../index.html">Home</a></nav></header>
+<main>
+  <h1>JPG to PNG Converter</h1>
+  <input type="file" id="fileInput" accept="image/*">
+  <button onclick="convertImage()">Convert</button>
+  <a id="downloadLink" style="display:none;">Download PNG</a>
+</main>
+<footer><p>&copy; 2025 ConvertMitra</p></footer>
+
+<script>
+function convertImage(){
+  const file = document.getElementById("fileInput").files[0];
+  if(!file) return alert("Select an image!");
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = function(){
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width; canvas.height = img.height;
+      canvas.getContext("2d").drawImage(img,0,0);
+      const link = document.getElementById("downloadLink");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "converted.png";
+      link.style.display = "block";
+    };
+    img.src = e.target.result;
+  }
+  reader.readAsDataURL(file);
+}
+</script>
+</body>
+</html>
