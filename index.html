@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ConvertMitra - Free online file conversion tools. Convert PDF to Word, Word to JPG, Excel to PDF, PPT to JPG and more. Fast, secure and easy to use.">
+    <meta name="keywords" content="file converter, pdf to word, word to jpg, pdf editor, excel to pdf, online tools, free converter">
+    <meta name="author" content="ConvertMitra">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ConvertMitra - Free Online File Conversion Tools">
+    <meta property="og:description" content="Convert files between formats with our free online tools. PDF to Word, Word to JPG, Excel to PDF and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.convertmitra.com">
+    <title>ConvertMitra - Free Online File Conversion Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e40af;
+            --accent: #4f46e5;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(30, 64, 175, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232563eb"/><path d="M0 0L100 100" stroke="%231e40af" stroke-width="2"/><path d="M100 0L0 100" stroke="%231e40af" stroke-width="2"/></svg>');
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-blue);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tools Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-blue);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .tool-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-header {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tool-title {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .tool-body {
+            padding: 20px;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .tool-button {
+            display: block;
+            width: 100%;
+            background: var(--secondary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tool-button:hover {
+            background: var(--dark-blue);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--white);
+            padding: 60px 0;
+            margin: 40px 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        /* Ad Spaces */
+        .ad-container {
+            background: var(--light-blue);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border: 1px dashed var(--primary-blue);
+        }
+
+        .ad-label {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .ad-placeholder {
+            width: 100%;
+            height: 90px;
+            background: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-weight: 600;
+            border-radius: 6px;
+        }
+
+        .ad-wide {
+            height: 180px;
+        }
+
+        .ad-responsive {
+            height: 280px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--bg-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-menu.active {
+                display: block;
+                margin-top: 15px;
+            }
+        }
+
+        /* Tool Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .converter-interface {
+            margin-top: 20px;
+        }
+
+        .file-drop-area {
+            border: 2px dashed var(--primary-blue);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-drop-area:hover {
+            background: var(--light-blue);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .convert-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .convert-btn:hover {
+            background: var(--dark-blue);
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--white);
+            padding: 60px 0;
+            margin: 40px 0;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--light-blue);
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fas fa-file-contract"></i></div>
+                    <div class="logo-text">ConvertMitra</div>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-tools"></i> All Tools</a></li>
+                        <li><a href="#"><i class="fas fa-dollar-sign"></i> Pricing</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="lang-toggle" id="langToggle">हिंदी</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#">Home</a> > <a href="#">Tools</a> > <span>File Conversion</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Convert Files in Seconds</h1>
+            <p>Free online tools to convert your documents, images, and PDFs. No installation needed. Fast, secure, and easy to use.</p>
+            <a href="#tools" class="cta-button">Start Converting Now</a>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <span class="ad-label">Advertisement</span>
+            <div class="ad-placeholder">Google AdSense Banner</div>
+        </div>
+    </div>
+
+    <!-- Tools Section -->
+    <section class="container" id="tools">
+        <h2 class="section-title">Our Conversion Tools</h2>
+        <div class="tools-grid">
+            <!-- PDF Tools -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+                    <h3 class="tool-title">PDF Tools</h3>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">Convert, edit and transform your PDF files with our easy-to-use tools</p>
+                    <a href="#" class="tool-button" data-tool="pdf-to-word">PDF to Word</a>
+                    <a href="#" class="tool-button" data-tool="pdf-to-excel">PDF to Excel</a>
+                    <a href="#" class="tool-button" data-tool="pdf-to-ppt">PDF to PowerPoint</a>
+                    <a href="#" class="tool-button" data-tool="pdf-editor">PDF Editor</a>
+                </div>
+            </div>
+
+            <!-- Word Tools -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon"><i class="fas fa-file-word"></i></div>
+                    <h3 class="tool-title">Word Tools</h3>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">Convert Word documents to various formats with perfect formatting</p>
+                    <a href="#" class="tool-button" data-tool="word-to-pdf">Word to PDF</a>
+                    <a href="#" class="tool-button" data-tool="word-to-jpg">Word to JPG</a>
+                    <a href="#" class="tool-button" data-tool="word-to-html">Word to HTML</a>
+                </div>
+            </div>
+
+            <!-- Image Tools -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon"><i class="fas fa-file-image"></i></div>
+                    <h3 class="tool-title">Image Tools</h3>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">Convert and edit images between different formats</p>
+                    <a href="#" class="tool-button" data-tool="jpg-to-png">JPG to PNG</a>
+                    <a href="#" class="tool-button" data-tool="png-to-jpg">PNG to JPG</a>
+                    <a href="#" class="tool-button" data-tool="image-converter">Image Converter</a>
+                    <a href="#" class="tool-button" data-tool="image-resizer">Image Resizer</a>
+                </div>
+            </div>
+
+            <!-- Other Tools -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon"><i class="fas fa-file-excel"></i></div>
+                    <h3 class="tool-title">Excel Tools</h3>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">Work with Excel spreadsheets and convert to other formats</p>
+                    <a href="#" class="tool-button" data-tool="excel-to-pdf">Excel to PDF</a>
+                    <a href="#" class="tool-button" data-tool="excel-to-csv">Excel to CSV</a>
+                    <a href="#" class="tool-butt
