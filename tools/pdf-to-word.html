@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF to Word Converter - ConvertMitra</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header><nav><a href="../index.html">Home</a></nav></header>
+<main>
+  <h1>PDF to Word Converter</h1>
+  <input type="file" id="pdfFile" accept="application/pdf">
+  <button onclick="convertPDF()">Convert</button>
+  <a id="downloadLink" style="display:none;">Download Word</a>
+</main>
+<footer><p>&copy; 2025 ConvertMitra</p></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<script>
+async function convertPDF(){
+  const file = document.getElementById('pdfFile').files[0];
+  if(!file) return alert("Select a PDF first!");
+  const reader = new FileReader();
+  reader.onload = async function(){
+    const typedarray = new Uint8Array(this.result);
+    const pdf = await pdfjsLib.getDocument(typedarray).promise;
+    let text = "";
+    for(let i=1;i<=pdf.numPages;i++){
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      text += content.items.map(s=>s.str).join(" ") + "\n\n";
+    }
+    const blob = new Blob([text], { type: "application/msword" });
+    const link = document.getElementById("downloadLink");
+    link.href = URL.createObjectURL(blob);
+    link.download = "converted.doc";
+    link.style.display = "block";
+  };
+  reader.readAsArrayBuffer(file);
+}
+</script>
+</body>
+</html>
