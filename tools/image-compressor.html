@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compressor - ConvertMitra</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header><nav><a href="../index.html">Home</a></nav></header>
+<main>
+  <h1>Image Compressor</h1>
+  <input type="file" id="fileInput" accept="image/*">
+  <button onclick="compressImage()">Compress</button>
+  <a id="downloadLink" style="display:none;">Download</a>
+</main>
+<footer><p>&copy; 2025 ConvertMitra</p></footer>
+
+<script src="https://unpkg.com/browser-image-compression/dist/browser-image-compression.js"></script>
+<script>
+async function compressImage() {
+  const file = document.getElementById("fileInput").files[0];
+  if (!file) return alert("Select an image first!");
+  const options = { maxSizeMB: 0.5, maxWidthOrHeight: 1200, useWebWorker: true };
+  const compressedFile = await imageCompression(file, options);
+  const link = document.getElementById("downloadLink");
+  link.href = URL.createObjectURL(compressedFile);
+  link.download = "compressed_" + file.name;
+  link.style.display = "block";
+  link.innerText = "Download Compressed Image";
+}
+</script>
+</body>
+  </html>
