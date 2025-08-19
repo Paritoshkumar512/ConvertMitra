@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDF Merger – Free Online | ConvertMitra</title>
+  <meta name="description" content="Merge multiple PDF files into one, fully client-side. Fast and secure." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<header><nav><a href="../index.html">Home</a></nav></header>
+<main>
+  <h1>PDF Merger</h1>
+  <p>Select PDFs to merge (order can be changed by re-selecting).</p>
+  <input type="file" id="files" accept="application/pdf" multiple>
+  <button id="merge">Merge PDFs</button>
+  <div id="status" class="output"></div>
+</main>
+<footer><p>© 2025 ConvertMitra</p></footer>
+<script>
+  const $ = (s)=>document.querySelector(s);
+  $('#merge').addEventListener('click', async () => {
+    const files = $('#files').files;
+    if(!files.length) return alert('Select at least two PDFs');
+    $('#status').textContent = 'Merging…';
+    const { PDFDocument } = PDFLib;
+    const outPdf = await PDFDocument.create();
+    for (const f of files) {
+      const bytes = new Uint8Array(await f.arrayBuffer());
+      const src = await PDFDocument.load(bytes);
+      const pages = await outPdf.copyPages(src, src.getPageIndices());
+      pages.forEach(p => outPdf.addPage(p));
+    }
+    const outBytes = await outPdf.save();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([outBytes], {type:'application/pdf'}));
+    a.download = 'merged.pdf'; a.textContent = 'Download merged.pdf';
+    const box = $('#status'); box.innerHTML=''; box.appendChild(a);
+    setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  });
+</script>
+</body>
+</html>
