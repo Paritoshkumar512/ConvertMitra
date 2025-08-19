@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDF Splitter – Free Online | ConvertMitra</title>
+  <meta name="description" content="Split pages from a PDF into a new file. Client-side only." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<header><nav><a href="../index.html">Home</a></nav></header>
+<main>
+  <h1>PDF Splitter</h1>
+  <input type="file" id="pdf" accept="application/pdf">
+  <label class="label">From page</label> <input class="input" id="from" type="number" min="1" value="1" style="max-width:120px;">
+  <label class="label">To page</label> <input class="input" id="to" type="number" min="1" value="1" style="max-width:120px;">
+  <button id="split">Split</button>
+  <div id="status" class="output"></div>
+</main>
+<footer><p>© 2025 ConvertMitra</p></footer>
+<script>
+  const $ = (s)=>document.querySelector(s);
+  $('#split').addEventListener('click', async ()=>{
+    const file = $('#pdf').files[0]; if(!file) return alert('Choose a PDF');
+    const from = parseInt($('#from').value,10), to = parseInt($('#to').value,10);
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const { PDFDocument } = PDFLib;
+    const src = await PDFDocument.load(bytes);
+    const total = src.getPageCount();
+    const start = Math.max(1, Math.min(from, total));
+    const end = Math.max(1, Math.min(to, total));
+    if (end < start) return alert('Range invalid');
+    $('#status').textContent = `Extracting pages ${start}-${end} of ${total}…`;
+    const out = await PDFDocument.create();
+    const idxs = Array.from({length: end-start+1}, (_,i)=> start-1+i);
+    const pages = await out.copyPages(src, idxs);
+    pages.forEach(p=>out.addPage(p));
+    const outBytes = await out.save();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([outBytes], {type:'application/pdf'}));
+    a.download = `split_${start}-${end}.pdf`; a.textContent = `Download split_${start}-${end}.pdf`;
+    const box = $('#status'); box.innerHTML=''; box.appendChild(a);
+    setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  });
+</script>
+</body>
+</html>
